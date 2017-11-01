@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>REACT First Step</title>
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+</head>
+<body>
+<div id="container"></div>
+<script type="text/babel">
+    let HelloWorld = React.createClass({
+        render: function () {
+            return (
+                    <p>Hola, {this.props.greetTarget}!</p>
+            );
+        }
+    });
+    let Buttonify = React.createClass({
+       render: function(){
+           return (
+                   <div>
+                       <button type={this.props.behavior}>{this.props.children}</button>
+                   </div>
+           );
+       }
+    });
+    ReactDOM.render(
+            <div>
+                <HelloWorld greetTarget="Batman"/>
+                <HelloWorld greetTarget="TranLam"/>
+                <HelloWorld greetTarget="Batman2"/>
+                <HelloWorld greetTarget="Batman3"/>
+                <HelloWorld greetTarget="Batman4"/>
+                <Buttonify behavior="Submit">SEND DATA</Buttonify>
+            </div>,
+        document.querySelector("#container")
+    );
+</script>
+</body>
+</html>
