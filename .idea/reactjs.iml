@@ -7,5 +7,6 @@
     <orderEntry type="library" name="react" level="application" />
     <orderEntry type="library" name="react-dom" level="application" />
     <orderEntry type="library" name="browser" level="application" />
+    <orderEntry type="library" name="react-router" level="application" />
   </component>
 </module>

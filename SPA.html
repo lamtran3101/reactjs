@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Single Page Application</title>
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router/4.2.0/react-router.min.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/babel">
+    let { Router,
+        Route,
+        IndexRoute,
+        IndexLink,
+        Link } = ReactRouter;
+
+    let Home = React.createClass({
+        render: function() {
+            return (
+                    <div>
+                        <h2>HELLO</h2>
+                        <p>Cras facilisis urna ornare ex volutpat, et
+                            convallis erat elementum. Ut aliquam, ipsum vitae
+                            gravida suscipit, metus dui bibendum est, eget rhoncus nibh
+                            metus nec massa. Maecenas hendrerit laoreet augue
+                            nec molestie. Cum sociis natoque penatibus et magnis
+                            dis parturient montes, nascetur ridiculus mus.</p>
+
+                        <p>Duis a turpis sed lacus dapibus elementum sed eu lectus.</p>
+                    </div>
+            );
+        }
+    });
+
+    let App = React.createClass({
+        render: function () {
+            return (
+                    <div>
+                        <h1>Simple SPA</h1>
+                        <ul className="header">
+                            <li>Home</li>
+                            <li>Stuff</li>
+                            <li>Contact</li>
+                        </ul>
+                        <div className="content">
+                        </div>
+                    </div>
+            )
+        }
+    });
+
+    let destination = document.querySelector("#container");
+    ReactDOM.render(
+            <Router>
+                <Route path="/" component={App}>
+                    <IndexRoute component={Home}/>
+                </Route>
+            </Router>,
+        destination
+    );
+</script>
+</body>
+</html>

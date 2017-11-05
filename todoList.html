@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>REACT First Step</title>
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+</head>
+<body>
+<div id="container"></div>
+<script type="text/babel">
+    let ListItems = React.createClass({
+        generateTask: function(elem){
+            return (
+                <li key={elem.key}>
+                    {elem.text}
+                    &nbsp;
+                    <a href="javascript:void(0)" onClick={(e) => this.props.removeHandler(e, elem.key)}>X</a>
+                </li>
+            );
+        },
+
+        render: function () {
+            const items = this.props.tasks;
+            const listTasks = items.map(this.generateTask);
+            return (
+                    <ul className="listItems">
+                        {listTasks}
+                    </ul>
+            );
+
+        }
+    });
+
+    let TodoList = React.createClass({
+        getInitialState: function () {
+            return {
+                items: []
+            }
+        },
+
+        addItem: function (e) {
+            const value = this._input.value;
+            this._input.value = "";
+            this._input.focus();
+            e.preventDefault();
+            if(value === "") return;
+
+
+            let currenItems = this.state.items;
+
+            currenItems.push({
+                "text": value,
+                "key": Date.now()
+            });
+
+            this.setState({
+                items: currenItems
+            })
+        },
+
+        removeItem: function(e, key){
+            e.preventDefault();
+            if(key) {
+                let currentItems = this.state.items;
+                let FilterItems = currentItems.filter(function(item){
+                    return item.key != key
+                })
+                this.setState({
+                    items: FilterItems
+                })
+            }
+        },
+
+        render: function () {
+            return (
+                    <div className="todoListWrapper">
+                        <div className="header">
+                            <form onSubmit={this.addItem}>
+                                <input
+                                        ref={(e) => this._input = e}
+                                        placeholder="Add Task"/>
+                                <button type="submit">Add</button>
+                            </form>
+                        </div>
+                        <div className="tasks">
+                            <ListItems tasks={this.state.items} removeHandler={this.removeItem}/>
+                        </div>
+                    </div>
+            );
+        }
+    });
+    let destination = document.querySelector("#container");
+    ReactDOM.render(
+            <TodoList/>,
+        destination
+    );
+</script>
+</body>
+</html>
